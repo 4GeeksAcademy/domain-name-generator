@@ -6,34 +6,39 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
-  //write your code here
-  console.log("Hello Rigo from the console!");
+  let pronoun = ['the', 'my'];
+  let adj = ['cool', 'fast'];
+  let noun = ['puedes', 'lotus', 'folio', 'focus'];
+  let domainNames = ['.es', '.us', '.io', '.com', '.net'];
 
-  let pronoun = ['the', 'my', 'your', 'their'];
-  let adj = ['great', 'big', 'crazy', 'lazy'];
-  let noun = ['wizard', 'ninja', 'pirate'];
-  let domainNames = ['.com','.net','.org','.dev'];
-
-  let domainElement = document.querySelector("#domain")
-
+  let domainElement = document.querySelector("#domain");
   domainElement.innerHTML = createDomain(pronoun, adj, noun, domainNames);
-
 };
-
-
 
 function createDomain (pronouns, adjectives, nouns, domains){
   let html = '';
-  pronouns.forEach( p => {
-    adjectives.forEach( a => {
-      nouns.forEach ( n => {
-        domains.forEach ( d => {
-           console.log(`${p}${a}${n}${d}`);
-           html +=  `<li>${p}${a}${n}${d}</li>`
-           
-        })
-      })
-    })
-  })
-  return `<ul> ${html}</ul>`;
+
+  pronouns.forEach(p => {
+    adjectives.forEach(a => {
+      nouns.forEach(n => {
+        const base = `${p}${a}${n}`;
+
+        domains.forEach(d => {
+          const tld = d.slice(1);
+
+          if (base.endsWith(tld)) {
+            const hacked = base.slice(0, base.length - tld.length) + d;
+            html += `<li>${hacked}</li>`;
+          } else {
+            const normal = base + d;
+            html += `<li>${normal}</li>`;
+          }
+        });
+
+      });
+    });
+  });
+
+  return `<ul>${html}</ul>`;
 }
+
