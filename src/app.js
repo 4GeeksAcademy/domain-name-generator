@@ -10,16 +10,18 @@ window.onload = function() {
   let noun = ['jogger', 'racoon', 'dev', 'hub'];
   let extensions = ['.com', '.net', '.us', '.io', '.es'];
 
-  for (let p = 0; p < pronoun.length; p++) {
-    for (let a = 0; a < adj.length; a++) {
-      for (let n = 0; n < noun.length; n++) {
-        for (let e = 0; e < extensions.length; e++) {
+  pronoun.forEach((p) => {
+    adj.forEach((a) => {
+      noun.forEach((n) => {
+        extensions.forEach((e) => {
           
-          let domainName = pronoun[p] + adj[a] + noun[n] + extensions[e];
+          let domainName = p + a + n + e;
+          
           console.log(domainName);
-        }
-      }
-    }
-  }
-  console.log("Hello Rigo from the console!");
+        });
+      });
+    });
+  });
+
+  console.log("Generación de dominios con forEach completada con éxito.");
 };
